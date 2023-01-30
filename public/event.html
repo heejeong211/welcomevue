@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{year}}<br>
+    <button v-on:click="plus">+</button>
+    <button v-on:click="minus">-</button>
+    <!--이벤트 수식어, submit하면 원래 화면이 새로고침되면서 input 박스 안에있는 text 없어졌는데 .prevent로 그걸 막음-->
+    <!--prevent: submit으로 보낸 메세지는 전달되면서 새로고침 막음-->
+    <form v-on:submit.prevent="confirmSubmit">
+      <input type="text" />
+      <button type="submit">submit!!</button>
+    </form>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        year: '2023'
+      },
+      methods: {
+        plus() {
+          this.year++;
+        },
+        minus() {
+          this.year--;
+        },
+        confirmSubmit() {
+          alert('okok');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!--배열-->
+    <div v-for="person in people">{{person.name}}은 {{person.age}}입니다.</div><br>
+    <!-- id값 가져옴, 그래서 1부터 시작함 -->
+    <div v-for="person in people">{{person.id}}번째, {{person.name}}은 {{person.age}}입니다.</div><br>
+    <!-- index값 가져옴, 그래서 0부터 시작함 -->
+    <div v-for="(person, index) in people">{{index}}번째, {{person.name}}은 {{person.age}}입니다.</div><br>
+    <!-- key값 설정해서 버튼 click 할때마다 key값 로그로 바인딩하기(key값은 index보다 데이터의 id값 이용하기) -->
+    <div v-for="(person, index) in people" :key="person.id + '-' + person.name">
+      <span>{{index}}번째, {{person.name}}은 {{person.age}}입니다.</span>
+      <button @click="fnWho" :binding="person.id + '-' + person.name">who?</button>
+    </div><br>
+    
+    <!--객체-->
+    <div v-for="(value, key, index) in book">{{index}}, {{key}}, {{value}}</div>
+  </div>
+  
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        //배열
+        people: [
+          {id: 1, name: 'a', age: 21},
+          {id: 2, name: 'b', age: 22},
+          {id: 3, name: 'c', age: 23},
+          {id: 4, name: 'd', age: 24}
+        ],
+        //객체
+        book: {
+          title: 'Harry Potter',
+          author: 'J. K. Rowling',
+          publishedAt: '26 June 1997'
+        }
+      }, methods: {
+        fnWho(e) {
+          console.log(e.target.getAttribute('binding'));
+        }
+      },
+    })
+  </script>
+</body>
+</html>

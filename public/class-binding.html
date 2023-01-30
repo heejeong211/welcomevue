@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .red {
+      color : red;
+    }
+    .font-size {
+      font-size: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- class binding (v-bind:class -> :class) -->
+    <!-- <div :class="{'red': isRed, 'font-size': isBig}">변경될 텍스트</div> -->
+    <!-- 삼항연산자 -->
+    <div :class="[isRed ? 'red' : '', isBig ? 'font-size' : '']">변경될 텍스트</div>
+    <button @click="changeClass">button</button>
+    <!-- 간단히 스타일만 바인딩 가능 -->
+    <div :style="{color: newColor, 'fontSize' : newSize}">변경될 스타일</div>
+  </div>
+  
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        isRed: false,
+        isBig: false,
+        newColor: 'blue',
+        newSize: '30px'
+      },
+      methods: {
+       changeClass() {
+        this.isRed = !this.isRed;
+        this.isBig = !this.isBig;
+        console.log(this.isRed);
+       }
+      }
+    })
+  </script>
+</body>
+</html>

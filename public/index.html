@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{selfIntroduceFunc()}}
+    {{person.name}}
+    <form v-on:submit = "confirmSubmit">
+      <input :type="typeOfInput" :value="initialValue" />
+      <button type="submit">Submit</button>
+    </form>
+    <a :href="link">click!!</a>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        person: {
+          name: 'hee',
+          age: '11111111'
+        },
+        typeOfInput: 'text',
+        initialValue: 'hello',
+        link: 'https://www.naver.com'
+      },
+      methods: {
+        thisYear: function(greeting) {
+          return `${greeting}! ${this.person.name}은 ${this.person.age} 입니다.`
+        },
+        selfIntroduceFunc() {
+          return this.thisYear('HIHI');
+        }
+      }
+    })
+  </script>
+</body>
+</html>
