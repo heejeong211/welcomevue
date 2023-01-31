@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- new Vue #app, #app2 가 서로 다른 인스턴스이기 때문에 함수 이름이 같아도 따로 움직임.-->
+  <div id="app">
+    {{name}}<br>
+    <button @click="changeName()">change</button>
+  </div>
+
+  <div id="app2">
+    {{name}}<br>
+    <button @click="changeName()">change</button>
+  </div>
+
+  <script>
+    /* new Vue({
+      el: '#app',
+      data: {
+        name: 'heeeee'
+      },
+      methods: {
+        changeName() {
+          this.name = this.name + ' changed!!';
+       } 
+      }
+    }),
+    new Vue({
+      el: '#app2',
+      data: {
+        name: 'heeeee2222'
+      },
+      methods: {
+        changeName() {
+          this.name = this.name + ' changed!!';
+        }
+      }
+    }) */
+
+    //서로 다른 인스턴스 호출하기
+    const app1 = new Vue({
+      el: '#app',
+      data: {
+        name: 'heeeeee'
+      }, methods: {
+        changeName() {
+          app2.name = app2.name + ' changed!!';
+        }
+      }
+    });
+    const app2 = new Vue({
+      el: '#app2',
+      data: {
+        name: 'heeeeee2222'
+      },
+      methods: {
+        changeName() {
+          app1.name = app1.name + ' changed!!';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{name}}<br>
+    <compo></compo>
+  </div>
+  <script>
+    //스크립트 안에선 component 선언이 instance 선언보다 더 먼저 있어야함.
+    //component 중첩등록
+    const greeting = Vue.component('greeting', {
+      template: `<div>hihi</div>`
+    });
+    //component 전역등록
+    const compo = Vue.component('compo', {
+      //template 객체는 html 태그가 여러줄로 구성된 경우 백틱(`)으로 감싸줘야 함.
+      template: `<div>
+                  {{name}}<br>
+                  <greeting></greeting> <!-- component 중첩등록(compo 컴포넌트 내부에 삽입하여 렌더링) -->
+                  <button @click="changeName()">change</button>
+                </div>`,
+      data() {
+        return {
+          name: 'jeeeong'
+        }
+      },
+      methods: {
+       changeName() {
+        this.name = this.name + ' changed!!';
+       } 
+      }
+    });
+    //instance 선언
+    const app1 = new Vue({
+      el: '#app',
+      data: {
+        name: 'heeeeee'
+      }
+    });
+  </script>
+</body>
+</html>

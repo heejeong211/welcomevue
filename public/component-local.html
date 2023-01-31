@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{name}}<br>
+    <compo></compo>
+  </div>
+  <script>
+    //스크립트 안에선 component 선언이 instance 선언보다 더 먼저 있어야함.
+    //greeting이라는 변수 선언
+    const greeting = {
+      template: `<div>hihi</div>`
+    };
+    const compo = Vue.component('compo', {
+      //component 지역등록
+      components: {
+        'greeting': greeting
+      },
+      //template 객체는 html 태그가 여러줄로 구성된 경우 백틱(`)으로 감싸줘야 함.
+      template: `<div>
+                  {{name}}<br>
+                  <greeting></greeting>
+                  <button @click="changeName()">change</button>
+                </div>`,
+      data() {
+        return {
+          name: 'jeeeong'
+        }
+      },
+      methods: {
+       changeName() {
+        this.name = this.name + ' changed!!';
+       } 
+      }
+    });
+    //instance 선언
+    const app1 = new Vue({
+      el: '#app',
+      data: {
+        name: 'heeeeee'
+      },
+      //component 지역등록
+      //compo라는 변수를 정의해서 컴포넌트의 내용을 넣어주고, app1 인스턴스에 components 객체를 만들어서 변수 이름으로 컴포넌트를 불러오는 방식
+      components: {
+        'compo': compo
+      }
+    });
+  </script>
+</body>
+</html>
